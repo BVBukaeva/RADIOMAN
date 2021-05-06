@@ -15,11 +15,11 @@ public class RadioTest {
     }
 
     @Test
-    public void checkVolumeMoreThanTen() {
+    public void checkVolumeMoreThanMax() {
         Radio radio = new Radio();
-        radio.setVolume(10);
+        radio.setVolume(100);
         radio.changeVolume("+");
-        assertEquals(radio.getVolume(), 10);
+        assertEquals(radio.getVolume(), 100);
     }
 
     @Test
@@ -67,7 +67,7 @@ public class RadioTest {
         Radio radio = new Radio();
         radio.setRadioStation(0);
         radio.changeRadioStation("prev");
-        assertEquals(radio.getRadioStation(), 9);
+        assertEquals(radio.getRadioStation(), 100);
     }
 
     @Test
@@ -91,5 +91,11 @@ public class RadioTest {
         Radio radio = new Radio();
         radio.changeRadioStation("7");
         assertEquals(radio.getRadioStation(), 7);
+    }
+    @Test
+    public void checkRadioStationSetNumberMoreThanMax() {
+        Radio radio = new Radio();
+        radio.changeRadioStation("10");
+        assertEquals(radio.getRadioStation(), 0);
     }
 }
