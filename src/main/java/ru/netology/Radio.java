@@ -3,6 +3,8 @@ package ru.netology;
 public class Radio {
     int volume;
     int radioStation;
+    private int maxVolume = 10;
+    private int maxRadioStation = 9;
 
     public int getVolume() {
         return volume;
@@ -20,33 +22,46 @@ public class Radio {
         this.radioStation = radioStation;
     }
 
-    public void changeVolume(String arg) {
-        if ("+".equals(arg)) {
-            if (volume < 10) {
-                volume++;
-            }
-        } else if ("-".equals(arg)) {
-            if (volume > 0) {
-                volume--;
-            }
+    public void increaseVolume() {
+        if (volume < maxVolume) {
+            volume++;
         }
     }
 
-    public void changeRadioStation(String arg) {
-        if (arg.matches("[0-9]")) {
-            radioStation = Integer.parseInt(arg);
-        } else if ("next".equals(arg)) {
-            if (radioStation == 9) {
-                radioStation = 0;
-            } else {
-                radioStation++;
-            }
-        } else if ("prev".equals(arg)) {
-            if (radioStation == 0) {
-                radioStation = 9;
-            } else {
-                radioStation--;
-            }
+    public void decreaseVolume() {
+        if (volume > 0) {
+            volume--;
         }
+    }
+
+    public void nextRadioStation() {
+
+        if (radioStation < maxRadioStation) {
+            radioStation++;
+        } else {
+            radioStation = 0;
+        }
+    }
+
+    public void prevRadioStation() {
+
+        if (radioStation > 0) {
+            radioStation--;
+        } else {
+            radioStation = maxRadioStation;
+        }
+    }
+
+    public void setCurrentRadioStation(int currentRadioStation) {
+
+        if (currentRadioStation > maxRadioStation) {
+            radioStation = maxRadioStation;
+            return;
+        }
+        if (currentRadioStation < 0) {
+            radioStation = 0;
+            return;
+        }
+        radioStation = currentRadioStation;
     }
 }
